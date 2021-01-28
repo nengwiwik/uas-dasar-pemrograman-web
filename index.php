@@ -119,7 +119,7 @@ if (!$conn) {
                     $kategori = mysqli_fetch_array($query_kategori, MYSQLI_ASSOC);
 
                     // hitung pajak
-                    $subtotal = $pemakaian * $tarif['tarif'];
+                    $subtotal = ($pemakaian * $tarif['tarif']) + $tarif['abodemen'];
                     $pajak = $tarif['pajak'];
                     $biaya_pajak = $subtotal * $pajak / 100;
                     $total = $subtotal + $biaya_pajak;
@@ -136,7 +136,7 @@ if (!$conn) {
                         <p class="card-text">Tarif Dasar: <strong>Rp <?= number_format($tarif['tarif'], 0, ',', '.'); ?></strong></p>
                         <p class="card-text">Abodemen: <strong>Rp <?= number_format($tarif['abodemen'], 0, ',', '.'); ?></strong></p>
                         <p class="card-text">Pajak: <strong><?= $pajak . "%"; ?></strong> <small>(Rp <?= number_format($biaya_pajak, 0, ',', '.'); ?>)</small></p>
-                        <p class="card-text">Subtotal: <strong>Rp <?= number_format($subtotal, 0, ',', '.'); ?></strong> <small>(<?= $pemakaian . " x Rp " . number_format($tarif['tarif'], 0, ',', '.'); ?>)</small></p>
+                        <p class="card-text">Subtotal: <strong>Rp <?= number_format($subtotal, 0, ',', '.'); ?></strong> <small>((<?= $pemakaian . " x Rp " . number_format($tarif['tarif'], 0, ',', '.') . ") + " . number_format($tarif['abodemen'], 0, ',', '.'); ?>)</small></p>
                         <p class="card-text">Total: <strong>Rp <?= number_format($total, 0, ',', '.'); ?></strong></p>
                     </div>
                 </div>
